@@ -1,8 +1,5 @@
-// EmergencyExit.cpp : Defines the entry point for the application.
-//
-
-#include "stdafx.h"
-#include "EmergencyExit.h"
+#include "stdafx.hpp"
+#include "resource.h"
 #include <string>
 
 #define WM_USER_TRAYICON ( WM_USER + 1 )
@@ -223,7 +220,7 @@ LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lParam)
 		{
 		case WM_KEYUP:
 		case WM_SYSKEYUP:
-			if (eatKeystroke = ((p->vkCode == VK_PAUSE) || p->vkCode == VK_CANCEL))
+			if (eatKeystroke = (p->vkCode == VK_PAUSE || p->vkCode == VK_CANCEL))
 				isHeld = false;
 
 			break;
@@ -256,7 +253,6 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 	instance = hInstance;
 	wcscpy_s(title, L"EmergencyExit");
 
-#pragma region CreateWindow
 	WNDCLASSEX wcex;
 	wcex.cbSize = sizeof(WNDCLASSEX);
 
@@ -278,7 +274,6 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 
 	if (!hwnd)
 		return FALSE;
-#pragma endregion
 
 	if (!StartupIsSet()) // startup entry isn't set to this exe
 		if (MessageBox(hwnd, L"Do you want to run EmergencyExit on startup?", title, MB_YESNO) == IDYES)
